@@ -3,8 +3,6 @@ package tests;
 import models.RawModel;
 import models.TexturedModel;
 
-import org.lwjgl.opengl.Display;
-
 import render.*;
 import shaders.StaticShader;
 import textures.ModelTexture;
@@ -38,7 +36,7 @@ public class MainGameLoop {
 		TexturedModel texturedModel = new TexturedModel(model, texture);
 		
 		//Keep updating the display until the user exits
-		while (!Display.isCloseRequested())
+		while (DisplayManager.requestClose())
 		{
 			renderer.prepare();
 			shader.start(); //Enable shader
