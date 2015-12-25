@@ -4,11 +4,9 @@ import static org.lwjgl.glfw.GLFW.*;
 import org.lwjgl.glfw.Callbacks;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.glfw.GLFWFramebufferSizeCallback;
+import org.lwjgl.glfw.GLFWKeyCallback;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GLContext;
-import org.lwjgl.util.Display;
-
-import tests.MainGameLoop;
 
 public class DisplayManager {
 
@@ -16,6 +14,7 @@ public class DisplayManager {
 	private static GLFWErrorCallback errorCallback; 
 	private static GLFWFramebufferSizeCallback framebufferSizeCallback; 
 	public static long window;
+	private static GLFWKeyCallback keyCallback;
 	public boolean fullscreen = false;
 
 	public static void createDisplay()
@@ -41,7 +40,27 @@ public class DisplayManager {
 		}));
 		onResize(width, height);
 		
+		glfwSetKeyCallback(window, (keyCallback = new GLFWKeyCallback() {
+		    public void invoke(long window, int key, int scancode, int action, int mods) {
+		    	if (action == GLFW_RELEASE)
+		    	{
+		    		//Do something with key
+		    	}
+		        if(key == GLFW_KEY_SPACE && action == GLFW_RELEASE) {
+		           
+		        } else if(key == GLFW_KEY_F5 && action == GLFW_RELEASE) {
+		          
+		        } else if(key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE) {
+
+		        }
+		    }
+		}));
+		
 		//GL11.glViewport(0, 0, width, height);
+	}
+	
+	public static double currentTimeMillis() {
+	    return glfwGetTime() * 1000;
 	}
 	
 	public static void onResize(int width, int height) {
