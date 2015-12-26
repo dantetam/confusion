@@ -40,7 +40,7 @@ public class MainGameLoop {
 		TexturedModel texturedModel = new TexturedModel(model, texture);
 		
 		//Keep updating the display until the user exits
-		while (DisplayManager.requestClose())
+		while (!DisplayManager.requestClose())
 		{
 			renderer.prepare();
 			shader.start(); //Enable shader

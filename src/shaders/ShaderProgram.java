@@ -73,7 +73,7 @@ public abstract class ShaderProgram {
 		catch (IOException e)
 		{
 			e.printStackTrace();
-			System.exit(-1);
+			//System.exit(-1);
 		}
 		//Create a new Shader object, add and compile the recorded source code (glsl)
 		int shaderID = GL20.glCreateShader(type);
@@ -83,7 +83,7 @@ public abstract class ShaderProgram {
 		{
 			System.out.println(GL20.glGetShaderInfoLog(shaderID, 500));
 			System.err.println("Could not compile shader");
-			System.exit(-1);
+			//System.exit(-1);
 		}
 		return shaderID;
 	}
