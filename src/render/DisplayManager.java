@@ -2,19 +2,24 @@ package render;
 
 import static org.lwjgl.glfw.GLFW.*;
 import org.lwjgl.glfw.Callbacks;
+import org.lwjgl.glfw.GLFWCursorPosCallback;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.glfw.GLFWFramebufferSizeCallback;
 import org.lwjgl.glfw.GLFWKeyCallback;
+import org.lwjgl.glfw.GLFWMouseButtonCallback;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GLContext;
 
 public class DisplayManager {
 
 	private static final int width = 1500, height = 900;
+	public static long window;
+	
 	private static GLFWErrorCallback errorCallback; 
 	private static GLFWFramebufferSizeCallback framebufferSizeCallback; 
-	public static long window;
 	private static GLFWKeyCallback keyCallback;
+	private static GLFWCursorPosCallback mousePosCallback;
+	private static GLFWMouseButtonCallback mouseButtonCallback;
 	public boolean fullscreen = false;
 
 	public static void createDisplay()
@@ -46,12 +51,31 @@ public class DisplayManager {
 		    	{
 		    		//Do something with key
 		    	}
-		        if(key == GLFW_KEY_SPACE && action == GLFW_RELEASE) {
+		        if (key == GLFW_KEY_SPACE && action == GLFW_RELEASE) {
 		           
-		        } else if(key == GLFW_KEY_F5 && action == GLFW_RELEASE) {
+		        } else if (key == GLFW_KEY_F5 && action == GLFW_RELEASE) {
 		          
-		        } else if(key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE) {
+		        } else if (key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE) {
 
+		        }
+		    }
+		}));
+		
+		glfwSetCursorPosCallback(window, (mousePosCallback = new GLFWCursorPosCallback() {
+		    public void invoke(long window, double xpos, double ypos) {
+		        //cursorPos.x = xpos;
+		        //cursorPos.y = framebuffer.height - ypos;
+		    }
+		}));
+		
+		glfwSetMouseButtonCallback(window, (mouseButtonCallback = new GLFWMouseButtonCallback() {
+		    public void invoke(long window, int button, int action, int mods) {
+		        if (button == 0) {
+		            if (action == GLFW_PRESS) {
+		               
+		            } else if (action == GLFW_RELEASE) {
+		               
+		            }
 		        }
 		    }
 		}));

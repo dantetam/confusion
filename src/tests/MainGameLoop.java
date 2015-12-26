@@ -1,5 +1,7 @@
 package tests;
 
+import org.lwjgl.glfw.GLFW;
+
 import models.RawModel;
 import models.TexturedModel;
 
@@ -11,6 +13,8 @@ public class MainGameLoop {
 	
 	public static void main(String[] args)
 	{
+		GLFW.glfwInit();
+		
 		DisplayManager.createDisplay();
 		Loader loader = new Loader();
 		Renderer renderer = new Renderer();
