@@ -10,6 +10,8 @@ import org.lwjgl.glfw.GLFWMouseButtonCallback;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GLContext;
 
+import tests.MainGameLoop;
+
 public class DisplayManager {
 
 	private static final int width = 1500, height = 900;
@@ -22,8 +24,11 @@ public class DisplayManager {
 	private static GLFWMouseButtonCallback mouseButtonCallback;
 	public boolean fullscreen = false;
 
-	public static void createDisplay()
+	private static MainGameLoop main;
+	
+	public static void createDisplay(MainGameLoop gameLoop)
 	{
+		main = gameLoop;
 		glfwSetErrorCallback(errorCallback = Callbacks.errorCallbackPrint(System.err));
 
 		glfwWindowHint(GLFW_RESIZABLE, GL11.GL_TRUE);
@@ -49,6 +54,7 @@ public class DisplayManager {
 		    public void invoke(long window, double xpos, double ypos) {
 		        //cursorPos.x = xpos;
 		        //cursorPos.y = framebuffer.height - ypos;
+		    	main.inputSystem.clicks.add(new Click());
 		    }
 		}));
 		
