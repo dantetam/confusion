@@ -10,6 +10,8 @@ import org.lwjgl.glfw.GLFWMouseButtonCallback;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GLContext;
 
+import system.InputSystem;
+import system.InputSystem.Click;
 import tests.MainGameLoop;
 
 public class DisplayManager {
@@ -54,7 +56,7 @@ public class DisplayManager {
 		    public void invoke(long window, double xpos, double ypos) {
 		        //cursorPos.x = xpos;
 		        //cursorPos.y = framebuffer.height - ypos;
-		    	main.inputSystem.clicks.add(new Click());
+		    	Mouse.setMouse((float)xpos, height - (float)ypos);
 		    }
 		}));
 		
@@ -62,7 +64,7 @@ public class DisplayManager {
 		    public void invoke(long window, int button, int action, int mods) {
 		        if (button == 0) {
 		            if (action == GLFW_PRESS) {
-		               
+		            	main.inputSystem.clicks.add(main.inputSystem.new Click(Mouse.getX(), Mouse.getY(), action, button));
 		            } else if (action == GLFW_RELEASE) {
 		               
 		            }
