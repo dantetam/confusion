@@ -45,22 +45,6 @@ public class DisplayManager {
 		}));
 		onResize(width, height);
 		
-		glfwSetKeyCallback(window, (keyCallback = new GLFWKeyCallback() {
-		    public void invoke(long window, int key, int scancode, int action, int mods) {
-		    	if (action == GLFW_RELEASE)
-		    	{
-		    		//Do something with key
-		    	}
-		        if (key == GLFW_KEY_SPACE && action == GLFW_RELEASE) {
-		           
-		        } else if (key == GLFW_KEY_F5 && action == GLFW_RELEASE) {
-		          
-		        } else if (key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE) {
-
-		        }
-		    }
-		}));
-		
 		glfwSetCursorPosCallback(window, (mousePosCallback = new GLFWCursorPosCallback() {
 		    public void invoke(long window, double xpos, double ypos) {
 		        //cursorPos.x = xpos;
