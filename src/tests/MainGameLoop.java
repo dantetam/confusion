@@ -28,6 +28,7 @@ public class MainGameLoop {
 		GLFW.glfwInit();
 		
 		inputSystem = new InputSystem(this);
+		systems.add(inputSystem);
 
 		DisplayManager.createDisplay(this);
 		Loader loader = new Loader();
@@ -60,6 +61,8 @@ public class MainGameLoop {
 			shader.start(); //Enable shader
 			renderer.render(texturedModel);
 			shader.stop(); //Disable shader when the draw is done
+			for (int i = 0; i < systems.size(); i++)
+				systems.get(i).tick();
 			DisplayManager.updateDisplay();
 		}
 

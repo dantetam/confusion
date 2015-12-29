@@ -37,7 +37,7 @@ public class DisplayManager {
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE); 
-		window = glfwCreateWindow(1600, 900, "Pong - LWJGL3", 0, 0);
+		window = glfwCreateWindow(1600, 900, "Confusion", 0, 0);
 		glfwMakeContextCurrent(window);
 		GLContext.createFromCurrent();
 		glfwShowWindow(window);
@@ -56,19 +56,13 @@ public class DisplayManager {
 		    public void invoke(long window, double xpos, double ypos) {
 		        //cursorPos.x = xpos;
 		        //cursorPos.y = framebuffer.height - ypos;
-		    	Mouse.setMouse((float)xpos, height - (float)ypos);
+		    	Mouse.setMouse((float)xpos, (float)ypos);
 		    }
 		}));
 		
 		glfwSetMouseButtonCallback(window, (mouseButtonCallback = new GLFWMouseButtonCallback() {
 		    public void invoke(long window, int button, int action, int mods) {
-		        if (button == 0) {
-		            if (action == GLFW_PRESS) {
-		            	main.inputSystem.clicks.add(main.inputSystem.new Click(Mouse.getX(), Mouse.getY(), action, button));
-		            } else if (action == GLFW_RELEASE) {
-		               
-		            }
-		        }
+		    	main.inputSystem.clicks.add(main.inputSystem.new Click(Mouse.getX(), Mouse.getY(), action, button));
 		    }
 		}));
 		
