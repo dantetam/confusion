@@ -60,6 +60,7 @@ public class Grid {
 		{
 			t.units.add(en);
 		}
+		en.offsetX = 0; en.offsetY = 0;
 	}
 	
 	public ArrayList<Tile> findPath(BaseEntity unit, int a, int b, int c, int d)

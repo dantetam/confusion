@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.lwjgl.glfw.GLFW;
 
+import level.Grid;
 import models.RawModel;
 import models.TexturedModel;
 
@@ -17,6 +18,8 @@ public class MainGameLoop {
 
 	public ArrayList<BaseSystem> systems = new ArrayList<BaseSystem>();
 	public InputSystem inputSystem;
+	
+	public Grid grid;
 	
 	public static void main(String[] args)
 	{
@@ -35,6 +38,9 @@ public class MainGameLoop {
 		Renderer renderer = new Renderer();
 		StaticShader shader = new StaticShader();
 
+		grid = new Grid();
+		
+		/*
 		//counter clockwise vertices
 		float[] vertices = {
 				//Left bottom and top right, resp.
@@ -53,19 +59,20 @@ public class MainGameLoop {
 		RawModel model = loader.loadToVAO(vertices, textureCoords, indices);
 		ModelTexture texture = new ModelTexture(loader.loadTexture("blueplasma"));
 		TexturedModel texturedModel = new TexturedModel(model, texture);
+		*/
 
 		//Keep updating the display until the user exits
 		while (!DisplayManager.requestClose())
 		{
 			renderer.prepare();
 			shader.start(); //Enable shader
-			renderer.render(texturedModel);
+			//renderer.render(texturedModel);
 			shader.stop(); //Disable shader when the draw is done
 			for (int i = 0; i < systems.size(); i++)
 				systems.get(i).tick();
 			DisplayManager.updateDisplay();
 		}
-
+		
 		//Clean up data
 		shader.cleanUp();
 		loader.cleanData();

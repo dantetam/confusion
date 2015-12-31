@@ -11,10 +11,12 @@ public class Civilization {
 	public ArrayList<BaseEntity> units = new ArrayList<BaseEntity>();
 	public ArrayList<Tile> land = new ArrayList<Tile>();
 	
+	public String name;
 	public Color color;
 	
-	public Civilization()
+	public Civilization(String name)
 	{
+		this.name = name;
 		/*r = (float)(Math.random()*255f);
 		g = (float)(Math.random()*255f);
 		b = (float)(Math.random()*255f);*/
