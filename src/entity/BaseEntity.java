@@ -13,7 +13,7 @@ public class BaseEntity {
 	
 	public String name;
 
-	public BaseEntity(Civilization civ, String name)
+	public BaseEntity(String name)
 	{
 		owner = civ;
 		civ.units.add(this);
