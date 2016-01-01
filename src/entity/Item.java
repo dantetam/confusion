@@ -1,5 +1,7 @@
 package entity;
 
-public class Item extends BaseEntity {
+public class Item extends BaseObject {
 
+	public int count;
+	
 }

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import entity.BaseEntity;
 import game.Civilization;
 import game.Pathfinder;
+import models.LevelManager;
 
 public class Grid {
 
@@ -13,6 +14,8 @@ public class Grid {
 	protected Pathfinder pathfinder;
 	public Intelligence intelligence;
 
+	public LevelManager levelManager;
+	
 	public Grid(int rows, int cols, int numCivs)
 	{
 		tiles = new Tile[rows][cols];
@@ -49,6 +52,11 @@ public class Grid {
 			}
 		}
 	}
+	
+	public void sync(LevelManager lm)
+	{
+		levelManager = lm;
+	}
 
 	public void move(BaseEntity en, int r, int c)
 	{
@@ -61,6 +69,7 @@ public class Grid {
 			t.units.add(en);
 		}
 		en.offsetX = 0; en.offsetY = 0;
+		levelManager.moveEntity(en, r, c);
 	}
 	
 	public ArrayList<Tile> findPath(BaseEntity unit, int a, int b, int c, int d)
