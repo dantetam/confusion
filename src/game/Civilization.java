@@ -6,10 +6,10 @@ import auxil.Color;
 import entity.BaseEntity;
 import level.Tile;
 
-public class Civilization {
+public class Faction {
 
 	public ArrayList<BaseEntity> units = new ArrayList<BaseEntity>();
-	public ArrayList<Tile> land = new ArrayList<Tile>();
+	//public ArrayList<Tile> land = new ArrayList<Tile>();
 	
 	public String name;
 	public Color color;

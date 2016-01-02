@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import auxil.Color;
 import entity.BaseEntity;
+import entity.BaseObject;
 import game.Civilization;
 
 public class Tile {
@@ -18,8 +19,9 @@ public class Tile {
 
 	public Color color;
 
+	public BaseObject item;
 	public ArrayList<BaseEntity> units = new ArrayList<BaseEntity>();
-
+	
 	public Tile(Grid g, int r, int c)
 	{
 		grid = g;

@@ -3,6 +3,7 @@ package level;
 import java.util.ArrayList;
 
 import entity.BaseEntity;
+import entity.BasePerson;
 import game.Civilization;
 import game.Pathfinder;
 import models.LevelManager;
@@ -86,74 +87,7 @@ public class Grid {
 	public int rows;
 	public int cols;
 
-	public Tile[] settlerSpots(Civilization civ, Tile t, double dist, int resultLength)
-	{
-		ArrayList<Object[]> best = new ArrayList<Object[]>(); //Make a 'tuple' of tile + its score
-		int[][] scores = returnCityScores(civ);
-		for (int r = 0; r < rows; r++)
-		{
-			if (Math.abs(t.row - r) > dist) //Process some tiles out of the way. What was the word...4 letters...curl? whip?...
-				continue;
-			for (int c = 0; c < cols; c++)
-			{
-				if (Math.abs(t.col - c) > dist) //This is so that if dist is a large number, we won't process a huge amount of nonexistent tiles
-					continue; //At most and least, process the entire grid
-				Tile candidate = getTile(r,c); double candidateDist = candidate.dist(t);
-				if (candidateDist <= dist)
-				{
-					int score = scores[r][c];
-					for (int i = 0; i < resultLength; i++)
-					{
-						if (best.size() <= i || (int)best.get(i)[1] < score) //Insert into the list if not of size or better score
-						{
-							best.add(i,new Object[]{candidate,score});
-							if (best.size() > resultLength) //Remove last element when list is sufficient length
-								best.remove(resultLength);
-							break;
-						}
-					}
-				}
-			}
-		}
-		Tile[] tiles = new Tile[resultLength];
-		for (int i = 0; i < resultLength; i++)
-		{
-			if (i >= best.size())
-			{
-				for (int j = 0; j < resultLength - i; j++)
-					best.add(new Object[]{null,-1});
-				break;
-			}
-			tiles[i] = (Tile)best.get(i)[0];
-		}
-		return tiles;
-	}
-	//Returns data for the scores of all possible 5x5 city areas, ignoring foreign tiles owned by others
-	private int[][] returnCityScores(Civilization civ) 
-	{
-		int[][] temp = new int[rows][cols];
-		int[][] tileScores = new int[rows][cols];
-		for (int r = 0; r < rows; r++)
-			for (int c = 0; c < cols; c++)
-				tileScores[r][c] = evalTile(civ,r,c);
-		//I feel like I've written this code before
-		for (int r = 0; r < rows; r++)
-			for (int c = 0; c < cols; c++)
-				for (int rr = r - 2; rr <= r + 2; rr++)
-					for (int cc = c - 2; cc <= c + 2; cc++)
-						if (getTile(rr,cc) != null)
-							temp[r][c] += tileScores[rr][cc];
-		return temp;
-	}
-	public int evalTile(Civilization civ, int r, int c)
-	{
-		Tile t = getTile(r,c);
-		if (t.owner == null || t.owner.equals(civ))
-			return t.food + t.foodImpr + t.metal + t.metalImpr;
-		return 0;
-	}
-	
-	private void colorTilesAverage()
+	/*private void colorTilesAverage()
 	{
 		float[][] newShades = new float[rows][cols];
 		for (int r = 0; r < rows; r++)
@@ -180,6 +114,6 @@ public class Grid {
 				tiles[r][c].color.set(newShades[r][c]);
 			}
 		}
-	}
+	}*/
 
 }
