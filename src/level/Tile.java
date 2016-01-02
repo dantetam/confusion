@@ -10,7 +10,6 @@ import game.Civilization;
 public class Tile {
 
 	public Grid grid;
-	public Civilization owner;
 	public int row, col;
 
 	public int biome, resource;

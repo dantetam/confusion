@@ -11,6 +11,8 @@ public class Zone {
 	public boolean[][] tilesBool; //Mark true for all tiles in zone
 	public ArrayList<Tile> tiles;
 	
+	public int id;
+	
 	public Zone(Grid grid)
 	{
 		this.grid = grid;
