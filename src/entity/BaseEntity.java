@@ -2,7 +2,6 @@ package entity;
 
 import java.util.ArrayList;
 
-import game.Civilization;
 import level.Intelligence;
 import level.Tile;
 

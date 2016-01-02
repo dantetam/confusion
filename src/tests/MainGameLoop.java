@@ -38,7 +38,7 @@ public class MainGameLoop {
 		Renderer renderer = new Renderer();
 		StaticShader shader = new StaticShader();
 
-		grid = new Grid();
+		grid = new Grid(5, 100, 100);
 		
 		/*
 		//counter clockwise vertices

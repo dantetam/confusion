@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import auxil.Color;
 import entity.BaseEntity;
 import entity.BaseObject;
-import game.Civilization;
 
 public class Tile {
 

@@ -14,7 +14,7 @@ public class Faction {
 	public String name;
 	public Color color;
 	
-	public Civilization(String name)
+	public Faction(String name)
 	{
 		this.name = name;
 		/*r = (float)(Math.random()*255f);
@@ -23,7 +23,7 @@ public class Faction {
 		color = new Color((float)(Math.random()*255f),(float)(Math.random()*255f),(float)(Math.random()*255f));
 	}
 	
-	public boolean equals(Civilization other)
+	public boolean equals(Faction other)
 	{
 		return color.r == other.color.r && color.g == other.color.g && color.b == other.color.b;
 	}

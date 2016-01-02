@@ -73,6 +73,12 @@ public class Grid {
 		levelManager.moveEntity(en, r, c);
 	}
 	
+	public void remove(BasePerson en)
+	{
+		en.location.units.remove(en);
+		en.location = null;
+	}
+	
 	public ArrayList<Tile> findPath(BasePerson unit, int a, int b, int c, int d)
 	{
 		return pathfinder.findPath(unit.owner, a, b, c, d, true);
