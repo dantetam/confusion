@@ -58,7 +58,7 @@ public class Grid {
 		levelManager = lm;
 	}
 
-	public void move(BaseEntity en, int r, int c)
+	public void move(BasePerson en, int r, int c)
 	{
 		if (en.location != null)
 			en.location.units.remove(en);
@@ -72,7 +72,7 @@ public class Grid {
 		levelManager.moveEntity(en, r, c);
 	}
 	
-	public ArrayList<Tile> findPath(BaseEntity unit, int a, int b, int c, int d)
+	public ArrayList<Tile> findPath(BasePerson unit, int a, int b, int c, int d)
 	{
 		return pathfinder.findPath(unit.owner, a, b, c, d, true);
 	}

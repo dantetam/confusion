@@ -6,18 +6,17 @@ import game.Civilization;
 import level.Intelligence;
 import level.Tile;
 
-public class BaseEntity {
+public abstract class BaseEntity {
 
 	public Tile location = null;
-	public float offsetX, offsetY;
+	public float offsetX, offsetY; //measured in units of self (1.0 -> full length of self)
 	
 	public String name;
 
 	public BaseEntity(String name)
 	{
-		owner = civ;
-		civ.units.add(this);
 		this.name = name;
+		offsetX = 0; offsetY = 0;
 	}
 
 	public void tick()
