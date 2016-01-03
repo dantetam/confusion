@@ -11,7 +11,7 @@ import models.LevelManager;
 public class Grid {
 
 	protected Tile[][] tiles;
-	public Faction[] civs;
+	public Faction[] facs;
 	protected Pathfinder pathfinder;
 	public Intelligence intelligence;
 
@@ -34,21 +34,23 @@ public class Grid {
 		}
 		pathfinder = new Pathfinder(this);
 
-		civs = new Faction[numCivs];
+		facs = new Faction[numCivs];
 		for (int i = 0; i < numCivs; i++)
 		{
-			Faction civ = new Faction();
-			civs[i] = civ;
-			for (int j = 0; j < 1; j++)
+			Faction fac = null;
+			if (i == 0)
 			{
-				BaseEntity en = new BaseEntity(civ, "Settler");
-				Tile t = null;
-				do
+				fac = new Faction("Colony");
+				for (int j = 0; j < 5; j++)
 				{
-					t = getTile((int)(Math.random()*tiles.length), (int)(Math.random()*tiles[0].length));
-				} while (t.units.size() != 0);
-				move(en, t.row, t.col);
+					//Spawn new units
+				}
 			}
+			else
+			{
+
+			}
+			facs[i] = fac;
 		}
 	}
 
@@ -89,7 +91,7 @@ public class Grid {
 
 	public ArrayList<Tile> findPath(BasePerson unit, int a, int b, int c, int d)
 	{
-		return pathfinder.findPath(unit.owner, a, b, c, d, true);
+		return pathfinder.findPath(a, b, c, d, true);
 	}
 
 	public Tile getTile(int r, int c)
