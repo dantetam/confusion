@@ -4,19 +4,19 @@ import java.util.ArrayList;
 
 import entity.BaseEntity;
 import entity.BasePerson;
-import game.Civilization;
+import game.Faction;
 import game.Pathfinder;
 import models.LevelManager;
 
 public class Grid {
 
 	protected Tile[][] tiles;
-	public Civilization[] civs;
+	public Faction[] civs;
 	protected Pathfinder pathfinder;
 	public Intelligence intelligence;
 
 	public LevelManager levelManager;
-	
+
 	public Grid(int rows, int cols, int numCivs)
 	{
 		tiles = new Tile[rows][cols];
@@ -32,14 +32,12 @@ public class Grid {
 				tiles[r][c] = tile;
 			}
 		}
-		colorTilesAverage();
-
 		pathfinder = new Pathfinder(this);
-		
-		civs = new Civilization[numCivs];
+
+		civs = new Faction[numCivs];
 		for (int i = 0; i < numCivs; i++)
 		{
-			Civilization civ = new Civilization();
+			Faction civ = new Faction();
 			civs[i] = civ;
 			for (int j = 0; j < 1; j++)
 			{
@@ -53,16 +51,20 @@ public class Grid {
 			}
 		}
 	}
-	
+
 	public void sync(LevelManager lm)
 	{
 		levelManager = lm;
 	}
 
-	public void move(BasePerson en, int r, int c)
+	public void move(BaseEntity en, int r, int c)
 	{
 		if (en.location != null)
+		{
 			en.location.units.remove(en);
+			if (en.location.item.equals(en))
+				en.location.item = null;
+		}
 		Tile t = getTile(r,c);
 		en.location = t; //Could possibly be null
 		if (t != null)
@@ -72,13 +74,19 @@ public class Grid {
 		en.offsetX = 0; en.offsetY = 0;
 		levelManager.moveEntity(en, r, c);
 	}
-	
-	public void remove(BasePerson en)
+
+	public void remove(BaseEntity en)
 	{
-		en.location.units.remove(en);
+		if (en.location != null)
+		{
+			en.location.units.remove(en);
+			if (en.location.item.equals(en))
+				en.location.item = null;
+		}
 		en.location = null;
+		levelManager.removeEntity(en);
 	}
-	
+
 	public ArrayList<Tile> findPath(BasePerson unit, int a, int b, int c, int d)
 	{
 		return pathfinder.findPath(unit.owner, a, b, c, d, true);
